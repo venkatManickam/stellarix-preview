@@ -424,3 +424,53 @@ a.img-reveal:hover img, .js a.img-reveal.in:hover img { transform: scale(1.04); 
 .logo-stacked { width: 200px; height: auto; }
 @media (min-width: 960px) { .logo-h { height: 52px; } }
 @media (max-width: 380px) { .logo-h { height: 38px; } }
+
+/* ---------- Motion v2 ---------- */
+/* Intro: the mark draws itself once per session, then the curtain lifts */
+.loader { display: none; }
+.intro .loader { display: grid; place-content: center; justify-items: center; gap: 22px; position: fixed; inset: 0; z-index: 200; background: var(--char);
+  animation: curtain 1s var(--ease) 1.85s forwards; }
+.loader-mark { width: 92px; height: auto; overflow: visible; }
+.loader-mark path { fill: var(--gold); fill-opacity: 0; stroke: var(--gold); stroke-width: 2.2; stroke-dasharray: 1 1; stroke-dashoffset: 1;
+  animation: draw 1.35s cubic-bezier(.6, 0, .3, 1) .15s forwards, markfill .5s ease 1.3s forwards; }
+.loader-name { color: #fff; font-size: 15px; letter-spacing: .6em; margin-right: -.6em; opacity: 0; animation: nameIn .7s var(--ease) 1.1s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes markfill { to { fill-opacity: 1; stroke-opacity: 0; } }
+@keyframes nameIn { from { opacity: 0; letter-spacing: .9em; } to { opacity: 1; letter-spacing: .6em; } }
+@keyframes curtain { to { transform: translateY(-100%); visibility: hidden; } }
+.intro .rise { animation-delay: calc(var(--d, 0s) + 2.1s); }
+
+/* Reading progress */
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 70; background: var(--gold); transform-origin: left; transform: scaleX(var(--sp, 0)); pointer-events: none; }
+
+/* Header hides on scroll down, returns on scroll up */
+.hdr { transition: background .4s, box-shadow .4s, transform .45s var(--ease), top .3s; }
+.hdr.is-hidden { transform: translateY(-110%); }
+
+/* Section labels: a short gold line draws in before the text */
+.js .eyebrow.reveal { display: flex; align-items: center; align-self: start; gap: 0; }
+.js .eyebrow.reveal::before { content: ""; width: 28px; height: 1px; background: currentColor; margin-right: 12px; transform: scaleX(0); transform-origin: left; transition: transform .9s var(--ease) .15s; }
+.js .eyebrow.reveal.in::before { transform: scaleX(1); }
+.sign-off .eyebrow.reveal, .ftr-cta .eyebrow.reveal { justify-content: center; }
+
+/* Headings rise word by word */
+.js .display.reveal.split, .js .statement.reveal.split { opacity: 1; transform: none; }
+.split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.split .w > span { display: inline-block; transform: translateY(110%); transition: transform 1s var(--ease); transition-delay: calc(var(--i) * 55ms + var(--d, 0s)); }
+.split.in .w > span { transform: none; }
+
+/* Depth: frames drift slightly as the page scrolls */
+[data-par] { will-change: transform; transform: translate3d(0, var(--py, 0px), 0); }
+.hero-slides { transform: translate3d(var(--mx, 0px), calc(var(--hy, 0px) + var(--my, 0px)), 0) scale(1.04); transition: transform .6s var(--ease); }
+.hero-in { transform: translate3d(0, var(--ty, 0px), 0); opacity: var(--to, 1); }
+
+/* Magnetic buttons (mouse only) */
+.btn { transition: color .35s var(--ease), border-color .35s, transform .4s var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro .loader, .loader { display: none; }
+  .split .w > span { transform: none; }
+  [data-par], .hero-slides, .hero-in { transform: none !important; opacity: 1 !important; }
+  .hdr.is-hidden { transform: none; }
+}
+.page-head-img, .case-hero-img { inset: -70px 0; }

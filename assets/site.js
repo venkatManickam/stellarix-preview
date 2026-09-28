@@ -41,6 +41,28 @@
     }, 6000);
   }
 
+  // Headings rise word by word: wrap each word (keeping <em> etc.) before the reveal observer starts.
+  if (!reduce) {
+    $$('.display.reveal, .statement.reveal').forEach(function (h) {
+      var i = 0;
+      (function walk(node) {
+        [].slice.call(node.childNodes).forEach(function (n) {
+          if (n.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            n.textContent.split(/(\s+)/).forEach(function (part) {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+              var w = document.createElement('span'), inner = document.createElement('span');
+              w.className = 'w'; inner.textContent = part; inner.style.setProperty('--i', i++); w.appendChild(inner); frag.appendChild(w);
+            });
+            n.parentNode.replaceChild(frag, n);
+          } else if (n.nodeType === 1) walk(n);
+        });
+      })(h);
+      h.classList.add('split');
+    });
+  }
+
   // Reveal on scroll.
   var targets = $$('.reveal, .img-reveal');
   if ('IntersectionObserver' in window && !reduce) {
@@ -64,6 +86,52 @@
     window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(prog); } }, { passive: true });
     prog();
   } else if (proc) { proc.style.setProperty('--p', 1); }
+
+  // One scroll loop: reading progress, header hide/show, hero depth, gentle parallax on photo frames.
+  var bar = $('.progress'), hero = $('.hero'), slidesEl = $('.hero-slides'), heroIn = $('.hero-in'), lastY = window.scrollY, ticking = false;
+  var par = reduce ? [] : $$('.feat-main, .feat-side .img-reveal, .exp-img, .proj-row-img, .page-head-img, .case-hero-img').map(function (el) {
+    var bg = el.classList.contains('page-head-img') || el.classList.contains('case-hero-img');
+    el.setAttribute('data-par', ''); return { el: el, k: bg ? 0.18 : -0.06, bg: bg };
+  });
+  function frame() {
+    var y = window.scrollY, vh = window.innerHeight, max = document.documentElement.scrollHeight - vh;
+    if (bar) bar.style.setProperty('--sp', max > 0 ? (y / max).toFixed(4) : 0);
+    if (!document.body.classList.contains('menu-open')) {
+      if (y > 400 && y > lastY + 4) hdr.classList.add('is-hidden');
+      else if (y < lastY - 4 || y < 400) hdr.classList.remove('is-hidden');
+    }
+    lastY = y;
+    if (!reduce && hero && y < vh * 1.2) {
+      slidesEl.style.setProperty('--hy', (y * 0.25).toFixed(1) + 'px');
+      heroIn.style.setProperty('--ty', (y * 0.12).toFixed(1) + 'px');
+      heroIn.style.setProperty('--to', Math.max(0, 1 - y / (vh * 0.75)).toFixed(3));
+    }
+    par.forEach(function (p) {
+      var r = p.el.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > vh + 100) return;
+      var off = p.bg ? -r.top : (r.top + r.height / 2 - vh / 2);
+      p.el.style.setProperty('--py', (off * p.k).toFixed(1) + 'px');
+    });
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
+  window.addEventListener('resize', frame);
+  frame();
+
+  // Mouse-only touches: hero drifts with the pointer, buttons lean towards it.
+  if (!reduce && window.matchMedia('(pointer: fine)').matches) {
+    if (hero) hero.addEventListener('mousemove', function (e) {
+      var x = e.clientX / window.innerWidth - 0.5, yy = e.clientY / window.innerHeight - 0.5;
+      slidesEl.style.setProperty('--mx', (x * -18).toFixed(1) + 'px'); slidesEl.style.setProperty('--my', (yy * -12).toFixed(1) + 'px');
+    });
+    $$('.btn').forEach(function (b) {
+      b.addEventListener('mousemove', function (e) {
+        var r = b.getBoundingClientRect();
+        b.style.transform = 'translate(' + ((e.clientX - r.left - r.width / 2) * 0.18).toFixed(1) + 'px,' + ((e.clientY - r.top - r.height / 2) * 0.3).toFixed(1) + 'px)';
+      });
+      b.addEventListener('mouseleave', function () { b.style.transform = ''; });
+    });
+  }
 
   // Gallery viewer.
   var lb = $('#lb'), links = $$('.gal-grid a');
