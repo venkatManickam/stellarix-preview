@@ -87,9 +87,26 @@
     prog();
   } else if (proc) { proc.style.setProperty('--p', 1); }
 
+  // Facts band: numbers count up when they come into view.
+  var nums = $$('[data-count]');
+  if (nums.length && 'IntersectionObserver' in window && !reduce) {
+    nums.forEach(function (el) { el.textContent = '0'; });
+    var cio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return; cio.unobserve(e.target);
+        var el = e.target, to = +el.dataset.count, t0 = null, dur = 1400 + to * 40;
+        requestAnimationFrame(function step(t) {
+          if (!t0) t0 = t; var p = Math.min(1, (t - t0) / dur), v = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(v * to); if (p < 1) requestAnimationFrame(step);
+        });
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(function (el) { cio.observe(el); });
+  }
+
   // One scroll loop: reading progress, header hide/show, hero depth, gentle parallax on photo frames.
   var bar = $('.progress'), hero = $('.hero'), slidesEl = $('.hero-slides'), heroIn = $('.hero-in'), lastY = window.scrollY, ticking = false;
-  var par = reduce ? [] : $$('.feat-main, .feat-side .img-reveal, .exp-img, .proj-row-img, .page-head-img, .case-hero-img').map(function (el) {
+  var par = reduce ? [] : $$('.feat-main, .feat-side .img-reveal, .proj-row-img, .page-head-img, .case-hero-img').map(function (el) {
     var bg = el.classList.contains('page-head-img') || el.classList.contains('case-hero-img');
     el.setAttribute('data-par', ''); return { el: el, k: bg ? 0.18 : -0.06, bg: bg };
   });
