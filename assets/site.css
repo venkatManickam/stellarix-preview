@@ -474,3 +474,14 @@ a.img-reveal:hover img, .js a.img-reveal.in:hover img { transform: scale(1.04); 
   .hdr.is-hidden { transform: none; }
 }
 .page-head-img, .case-hero-img { inset: -70px 0; }
+
+/* Material cards with photos */
+.mat { padding: 0; display: flex; flex-direction: column; overflow: hidden; }
+.mat-img { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--sand-2); }
+.mat-img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); transition: transform 1.2s var(--ease), filter .6s; filter: saturate(.9); }
+.mat:hover .mat-img img { transform: scale(1.12); filter: saturate(1.05); }
+.mat-badge { position: relative; z-index: 1; width: 52px; height: 52px; margin: -26px 0 16px; border-radius: 50%; background: var(--char); display: grid; place-items: center; box-shadow: 0 8px 20px rgba(0, 0, 0, .25); }
+.mat-badge .mat-ic { width: 28px; height: 28px; margin: 0; stroke: var(--gold); }
+.mat:hover .mat-badge .mat-ic { transform: rotate(-8deg) scale(1.08); }
+.mat-body { padding: 0 24px 30px; }
+.photo-credit { margin: 28px 0 0; font-size: 12.5px; color: var(--ink-2); }
