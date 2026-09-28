@@ -485,3 +485,17 @@ a.img-reveal:hover img, .js a.img-reveal.in:hover img { transform: scale(1.04); 
 .mat:hover .mat-badge .mat-ic { transform: rotate(-8deg) scale(1.08); }
 .mat-body { padding: 0 24px 30px; }
 .photo-credit { margin: 28px 0 0; font-size: 12.5px; color: var(--ink-2); }
+
+/* Service cards with photos */
+.svc { padding: 0; display: flex; flex-direction: column; }
+.svc-img { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--sand-2); }
+.svc-img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.03); transition: transform 1.2s var(--ease); }
+.svc:hover .svc-img img { transform: scale(1.1); }
+.own-tag { position: absolute; left: 12px; bottom: 12px; background: rgba(28, 27, 25, .88); color: var(--gold); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; padding: 6px 10px; }
+.svc-body { padding: 24px 24px 28px; }
+.svc-groups .photo-credit { margin-top: 36px; }
+@media (min-width: 640px) {
+  .svc-list .svc:last-child:nth-child(odd) { grid-column: 1 / -1; flex-direction: row; }
+  .svc-list .svc:last-child:nth-child(odd) .svc-img { width: 50%; aspect-ratio: auto; min-height: 220px; flex: none; }
+  .svc-list .svc:last-child:nth-child(odd) .svc-body { align-self: center; }
+}
