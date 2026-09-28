@@ -418,3 +418,9 @@ a.img-reveal:hover img, .js a.img-reveal.in:hover img { transform: scale(1.04); 
   .mat-teaser-in { grid-template-columns: 1.2fr 1fr; gap: 80px; }
 }
 .commit .display { margin-bottom: 20px; }
+
+/* Vector logo */
+.logo-h { height: 44px; width: auto; display: block; }
+.logo-stacked { width: 200px; height: auto; }
+@media (min-width: 960px) { .logo-h { height: 52px; } }
+@media (max-width: 380px) { .logo-h { height: 38px; } }
