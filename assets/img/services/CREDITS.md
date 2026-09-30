@@ -9,7 +9,15 @@ Photos labelled "Our work" on the Services page are Stellarix's own (Vismay, Che
 | planning.webp | https://www.pexels.com/photo/architect-architecture-blueprint-build-271667/ |
 | visualisation.webp | https://www.pexels.com/photo/a-man-using-a-computer-in-designing-7504746/ |
 | commercial.webp | https://www.pexels.com/photo/person-people-building-construction-6615095/ |
-| residential.webp | https://www.pexels.com/photo/close-up-photo-of-fabric-color-pallet-259756/ |
 | electrical.webp | https://www.pexels.com/photo/electrician-fixing-an-opened-switchboard-257736/ |
 | execution.webp | https://www.pexels.com/photo/room-renovation-3615721/ |
 | site.webp | https://www.pexels.com/photo/floor-plan-on-table-834892/ |
+
+## Client-supplied photos (2026-09-30)
+Provided by Stellarix Design Studio; not stock. Not labelled "Our work" because they were not confirmed as completed Stellarix projects.
+| File | Source |
+|---|---|
+| residential.webp | client file "resedential.jpeg" (bedroom, circular cove ceiling) |
+| ceiling.webp | client file "fall ceiling.jpeg" (showroom false ceiling), top-cropped to 4:3 |
+
+flooring-hyderabad.webp is Stellarix's own work (Vismay Hyderabad, crop of Hyd2.jpeg) and IS labelled "Our work".

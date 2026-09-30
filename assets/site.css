@@ -20,7 +20,7 @@ p { margin: 0 0 1em; }
 .skip:focus { left: 8px; }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
-.draft { position: relative; z-index: 60; background: var(--gold); color: var(--char); font-size: 12.5px; text-align: center; padding: 0 16px; height: 26px; line-height: 26px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .04em; }
+.draft { position: relative; z-index: 40; background: var(--gold); color: var(--char); font-size: 12.5px; text-align: center; padding: 0 16px; height: 26px; line-height: 26px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .04em; }
 
 /* Type */
 .eyebrow { font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-2); margin: 0 0 16px; font-weight: 500; }
@@ -83,7 +83,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .menu[hidden] { display: flex; }
 .menu.is-open { opacity: 1; visibility: visible; }
 .menu nav { display: grid; gap: 6px; }
-.menu nav a { font-family: var(--serif); font-size: 44px; text-decoration: none; opacity: 0; transform: translateY(20px); transition: opacity .5s var(--ease), transform .5s var(--ease), color .3s; }
+.menu nav a { font-family: var(--serif); font-size: clamp(26px, 7.5vw, 34px); padding: 4px 0; text-decoration: none; opacity: 0; transform: translateY(20px); transition: opacity .5s var(--ease), transform .5s var(--ease), color .3s; }
 .menu nav a[aria-current], .menu nav a:hover { color: var(--gold); }
 .menu.is-open nav a { opacity: 1; transform: none; }
 .menu.is-open nav a:nth-child(2) { transition-delay: .05s; } .menu.is-open nav a:nth-child(3) { transition-delay: .1s; }
@@ -102,6 +102,7 @@ body.menu-open { overflow: hidden; }
 @keyframes kenburns { from { transform: scale(1.12) translate3d(0, 0, 0); } to { transform: scale(1.01) translate3d(-1%, -1%, 0); } }
 .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20, 19, 17, .72) 0%, rgba(20, 19, 17, .35) 55%, rgba(20, 19, 17, 0) 85%), linear-gradient(180deg, rgba(20, 19, 17, .55) 0%, rgba(20, 19, 17, .1) 30%, rgba(20, 19, 17, .6) 75%, rgba(20, 19, 17, .9) 100%); }
 .hero .eyebrow, .case-hero .eyebrow { text-shadow: 0 1px 12px rgba(0, 0, 0, .6); }
+@media (max-width: 480px) { .hero .eyebrow, .case-hero .eyebrow, .page-head .eyebrow { letter-spacing: .16em; font-size: 11px; } }
 .hero-in { position: relative; padding-top: 140px; padding-bottom: 110px; }
 .hero-title { font-size: clamp(50px, 12vw, 116px); line-height: .98; margin-bottom: 26px; }
 .hero-lead { font-size: 18px; font-weight: 300; color: #e6dfd4; max-width: 30em; margin-bottom: 32px; }
