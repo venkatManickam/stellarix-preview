@@ -104,6 +104,8 @@ body.menu-open { overflow: hidden; }
 .hero .eyebrow, .case-hero .eyebrow { text-shadow: 0 1px 12px rgba(0, 0, 0, .6); }
 @media (max-width: 480px) { .hero .eyebrow, .case-hero .eyebrow, .page-head .eyebrow { letter-spacing: .16em; font-size: 11px; } }
 .hero-in { position: relative; padding-top: 140px; padding-bottom: 110px; }
+.wrap.hero-in { padding-top: calc(var(--hdr) + 72px); }
+.wrap.case-hero-in { padding-top: calc(var(--hdr) + 56px); }
 .hero-title { font-size: clamp(50px, 12vw, 116px); line-height: .98; margin-bottom: 26px; }
 .hero-lead { font-size: 18px; font-weight: 300; color: #e6dfd4; max-width: 30em; margin-bottom: 32px; }
 .hero-dots { position: absolute; left: 16px; bottom: 36px; display: flex; gap: 8px; }
@@ -391,13 +393,7 @@ a.img-reveal:hover img, .js a.img-reveal.in:hover img { transform: scale(1.04); 
   .slide-logo { background: var(--char); }
   .slide-logo img { position: absolute; right: 0; top: 0; width: 60%; height: 100%; }
 }
-/* Phones/tablets: the whole sign in a band under the header, text below it on charcoal (no logo behind the headline) */
-@media (max-width: 959px) {
-  .slide-logo { background: var(--char); }
-  .slide-logo img { position: absolute; left: 0; top: 70px; width: 100%; height: 34%; object-fit: contain; object-position: center top;
-    -webkit-mask-image: linear-gradient(180deg, #000 75%, transparent); mask-image: linear-gradient(180deg, #000 75%, transparent); }
-}
-@media (max-width: 959px) and (max-height: 760px) { .slide-logo img { display: none; } } /* short phones: no room above the headline; the header already shows the logo */
+
 
 /* Materials */
 .mats { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
