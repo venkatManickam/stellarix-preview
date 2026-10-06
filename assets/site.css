@@ -218,6 +218,10 @@ a.img-reveal:hover img, .js a.img-reveal.in:hover img { transform: scale(1.04); 
 .svc-groups { display: grid; gap: 56px; margin-top: 56px; }
 .svc-group { display: grid; gap: 22px; border-top: 1px solid var(--line); padding-top: 28px; }
 .svc-group-head { display: flex; align-items: baseline; gap: 16px; }
+.svc-group-desc { margin: 14px 0 0; color: var(--ink-2, #5d574e); font-size: 15.5px; line-height: 1.65; max-width: 34em; }
+.svc-group-eg { margin: 12px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--gold-2, #a27a37); }
+.svc-group-eg span { display: block; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted, #8a8377); margin-bottom: 4px; }
+.pillar .pillar-eg { margin-top: 10px; font-size: 13.5px; color: var(--gold-2, #a27a37); }
 .svc-list { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .svc { background: var(--paper); padding: 26px 24px; transition: background .35s; position: relative; }
 .svc::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--gold); transform: scaleY(0); transform-origin: bottom; transition: transform .45s var(--ease); }
